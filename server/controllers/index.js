@@ -2,8 +2,7 @@ const model = require('../models');
 
 const todos = {
   get: (req, res) => {
-    let params = [req.session.username];
-    model.todos.get(params, (err, results) => {
+    model.todos.get((err, results) => {
       if (err) {
         console.error('Error retrieving todos for', username);
         res.sendStatus(500);
@@ -14,7 +13,7 @@ const todos = {
   },
   post: (req, res) => {
     let newTodo = req.body;
-    let params = [req.session.username, newTodo.todoDescription, newTodo.createdOn, newTodo.completed];
+    let params = [newTodo.todoDescription, newTodo.createdOn, newTodo.completed];
     model.todos.addTodo(params, (err, results) => {
       if (err) {
         console.error('Error adding todo!');
@@ -24,7 +23,7 @@ const todos = {
     });
   },
   put: (req, res) => {
-    let params = [req.body];
+    let params = [req.body.todoId];
     model.todos.update(params, (err, results) => {
       if (err) {
         console.error('Error updating todo!');

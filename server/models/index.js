@@ -1,30 +1,28 @@
-const mongo = require('../../database/mongo');
+//const mongo = require('../../database/mongo');
 const sql = require('../../database/mysql');
 
 const todos = {
-  get: (params, cb) => {
-    const queryString = `SELECT id, createdOn, user, todoDescription, completed
-                       FROM todos WHERE user = ?;`
-    sql.query(queryString, params, (err, results) => {
+  get: (cb) => {
+    const queryString = `SELECT id, createdOn, todoDescription, completed FROM todos;`
+    sql.query(queryString, (err, results) => {
       cb(err, results);
     });
   },
   update: (params, cb) => {
-    const queryString = `UPDATE todos SET completed = NOT completed
-                       WHERE id = ?;`
+    const queryString = `UPDATE todos SET completed = NOT completed WHERE id = ?;`
     sql.query(queryString, params, (err, results) => {
       cb(err, results);
     });
   },
   deleteCompleted: (params, cb) => {
-    const queryString = `DELETE FROM todos WHERE completed = 1 AND user = ?;`
+    const queryString = `DELETE FROM todos WHERE completed = 1;`
     sql.query(queryString, params, (err, results) => {
       cb(err, results);
     });
   },
   addTodo: (params, cb) => {
-    const queryString = `INSERT INTO todos (user, todoDescription, createdOn, completed)
-                       VALUES (?, ?, ?, ?);`
+    const queryString = `INSERT INTO todos (todoDescription, createdOn, completed)
+                       VALUES (?, ?, ?);`
     sql.query(queryString, params, (err, results) => {
       cb(err, results);
     });

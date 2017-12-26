@@ -1,14 +1,18 @@
-angular.module('app')
+angular.module('todo-list')
 .service('todosService', function($http) {
-  this.getAll = function(callback) {
-    $http.get('/todos')
-    .then(function({data}) {
-      if(callback) {
-        callback(data);
-      }
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
+  this.getAll = function() {
+    return $http.get('/todos');
   };
+
+  this.deleteCompleted = function() {
+    return $http.delete('/todos');
+  };
+
+  this.toggleTodo = function(todoId) {
+    return $http.put('/todos', JSON.stringify({ todoId: todoId }));
+  };
+
+  this.addTodo = function(todo) {
+    return $http.post('/todos', JSON.stringify(todo));
+  }
 });

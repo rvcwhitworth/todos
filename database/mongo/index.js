@@ -28,4 +28,24 @@ const selectAll = (callback) => {
   });
 };
 
+const addUser = (user, encryptedPass, callback) => {
+  User.create({
+    username: user,
+    pass: encryptedPass
+  }, callback);
+};
+
+const userExists = (user, callback) => {
+  User.find({username: user}, (err, users) => {
+    if (err) {
+      console.error('Error searching for user!');
+      callback(err, null);
+    } else {
+      callback(null, users.length !== 0);
+    }
+  });
+};
+
 module.exports.selectAll = selectAll;
+module.exports.addUser = addUser;
+module.exports.userExists = userExists;

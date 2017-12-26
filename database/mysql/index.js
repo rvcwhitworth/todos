@@ -7,14 +7,4 @@ const connection = mysql.createConnection({
   database : 'todoList'
 });
 
-var selectAll = function(callback) {
-  connection.query('SELECT * FROM todos', function(err, results, fields) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
-
-module.exports.selectAll = selectAll;
+module.exports = connection;

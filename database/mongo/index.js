@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/todoList');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todoList', { useMongoClient: true });
 
 const db = mongoose.connection;
 

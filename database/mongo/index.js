@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todoList', { useMongoClient: true });
+const bcrypt = require('bcrypt-nodejs');
 
 const db = mongoose.connection;
 
@@ -11,41 +12,19 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-const userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
   username: String,
-  pass: String
+  password: String
 });
 
-const User = mongoose.model('User', userSchema);
-
-const selectAll = (callback) => {
-  User.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
-    }
-  });
+userSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-const addUser = (user, encryptedPass, callback) => {
-  User.create({
-    username: user,
-    pass: encryptedPass
-  }, callback);
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
 };
 
-const userExists = (user, callback) => {
-  User.find({username: user}, (err, users) => {
-    if (err) {
-      console.error('Error searching for user!');
-      callback(err, null);
-    } else {
-      callback(null, users.length !== 0);
-    }
-  });
-};
+module.exports = mongoose.model('User', userSchema);
 
-module.exports.selectAll = selectAll;
-module.exports.addUser = addUser;
-module.exports.userExists = userExists;
+

@@ -49,5 +49,21 @@ const users = {
   }
 }
 
+const login = {
+  post: (req, res) => {
+    console.log(req.body);
+    res.redirect('/');
+  }
+}
+
+const signup = {
+  post: (req, res) => {
+    console.log(req.body);
+    res.redirect('/');
+  }
+}
+
 module.exports.users = users;
 module.exports.todos = todos;
+module.exports.login = login;
+module.exports.signup = signup;

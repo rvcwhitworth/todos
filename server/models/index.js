@@ -1,5 +1,6 @@
-//const mongo = require('../../database/mongo');
+const User = require('../../database/mongo');
 const sql = require('../../database/mysql');
+const bcrypt = require('bcrypt-nodejs');
 
 const todos = {
   get: (cb) => {
@@ -31,21 +32,18 @@ const todos = {
 
 const users = {
   addUser: (username, encryptedPass, cb) => {
-    mongo.addUser(username, encryptedPass, (error, user) => {
-      if (error) {
-        console.error('Error when adding user');
-      } else {
-        cb(user);
-      }
-    })
+    User.create({
+      username: user,
+      pass: encryptedPass
+    }, callback);
   },
   userExists: (username, cb) => {
-    mongo.userExists(username, (err, exists) => {
+    User.find({username: user}, (err, users) => {
       if (err) {
-        console.error('Error when checking if user exists');
-        cb(err, null);
+        console.error('Error searching for user!');
+        callback(err, null);
       } else {
-        cb(null, exists);
+        callback(null, users.length !== 0);
       }
     });
   }

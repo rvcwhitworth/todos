@@ -1,12 +1,10 @@
 <div id="app">
   <todoEntry 
-    service="$ctrl.todosService" 
-    on-submit="$ctrl.handleSubmit" 
-    on-click="$ctrl.deleteAll" 
+    service="$ctrl.todosService"
+    refresh="$ctrl.refreshTodos"
   />
   <todoList 
-    service="$ctrl.todosService" 
+    service="$ctrl.todosService"
     todo-list="$ctrl.todoList" 
-    on-click="$ctrl.toggleCompleted"
   />
 </div>

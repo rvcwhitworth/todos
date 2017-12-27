@@ -1,8 +1,8 @@
 <div 
   class="todo-list-item" 
-  ng-class="{'completed': $ctrl.todo.completed}" 
-  ng-click="$ctrl.toggleCompleted"
+  ng-class="{completed: $ctrl.todo.completed}" 
+  ng-click="$ctrl.toggleCompleted()"
 >
   <span class="todoDescription"> {{ $ctrl.todo.todoDescription }} </span>
-  <span class="todoCreation"> {{ $ctrl.todo.createdOn }}</span>
+  <span class="todoCreation"> {{ $ctrl.todo.createdOn }} </span>
 </div>

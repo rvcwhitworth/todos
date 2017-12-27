@@ -4,10 +4,10 @@ const todos = {
   get: (req, res) => {
     model.todos.get((err, results) => {
       if (err) {
-        console.error('Error retrieving todos for', username);
+        console.error('Error retrieving todos', err);
         res.sendStatus(500);
       } else {
-        res.send(results);
+        res.status(200).send(results);
       }
     })
   },
@@ -16,7 +16,7 @@ const todos = {
     let params = [newTodo.todoDescription, newTodo.createdOn, newTodo.completed];
     model.todos.addTodo(params, (err, results) => {
       if (err) {
-        console.error('Error adding todo!');
+        console.error('Error adding todo!', err);
       } else {
         res.sendStatus(201);
       }
@@ -26,7 +26,7 @@ const todos = {
     let params = [req.body.todoId];
     model.todos.update(params, (err, results) => {
       if (err) {
-        console.error('Error updating todo!');
+        console.error('Error updating todo!', err);
       } else {
         res.sendStatus(204);
       }
@@ -35,7 +35,7 @@ const todos = {
   delete: (req, res) => {
     model.todos.deleteCompleted((err) => {
       if (err) {
-        console.err('error deleting todos');
+        console.err('error deleting todos', err);
       } else {
         res.sendStatus(204);
       }

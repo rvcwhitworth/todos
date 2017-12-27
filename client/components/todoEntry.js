@@ -17,7 +17,7 @@ angular.module('todo-list')
       createdOn: new Date().toLocaleString(),
       completed: false
     }
-    todosService.addTodo(todo)
+    this.service.addTodo(todo)
     .then((response) => {
       this.todoDescription = '';
       this.refresh();
@@ -33,5 +33,5 @@ angular.module('todo-list')
     refresh: '<'
   },
   controller: 'TodoEntryCtrl',
-  templateURL: '../templates.todoEntry.html'
+  templateUrl: '../templates/todoEntry.html'
 });

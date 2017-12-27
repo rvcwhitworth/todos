@@ -3,7 +3,7 @@ const sql = require('../../database/mysql');
 
 const todos = {
   get: (cb) => {
-    const queryString = `SELECT id, createdOn, todoDescription, completed FROM todos;`
+    const queryString = `SELECT * FROM todos;`
     sql.query(queryString, (err, results) => {
       cb(err, results);
     });

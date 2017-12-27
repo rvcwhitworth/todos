@@ -1,7 +1,7 @@
 angular.module('todo-list')
 .service('todosService', function($http) {
   this.getAll = function() {
-    return $http.get('/todos');
+    return $http.get('/todos')
   };
 
   this.deleteCompleted = function() {

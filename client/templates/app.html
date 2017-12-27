@@ -1,10 +1,10 @@
 <div id="app">
-  <todoEntry 
-    service="$ctrl.todosService"
-    refresh="$ctrl.refreshTodos"
-  />
-  <todoList 
-    service="$ctrl.todosService"
-    todo-list="$ctrl.todoList" 
-  />
+  <h1>Todo List</h1>
+  <div>
+    <todo-entry service="$ctrl.todosService" refresh="$ctrl.refreshTodos" />
+  </div>
+  
+  <div>
+    <todo-list service="$ctrl.todosService" todos="$ctrl.todoList" />
+  </div>
 </div>

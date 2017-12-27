@@ -1,6 +1,6 @@
 <div id="todoEntry">
-  <form ng-submit="$ctrl.handleSubmit">
-    <input placeholder="What needs to be done?" type="text" ng-model="todoDescription" />
+  <form ng-submit="$ctrl.handleSubmit()">
+    <input placeholder="What needs to be done?" type="text" ng-model="$ctrl.todoDescription" />
   </form>
-  <button ng-click="$ctrl.deleteAll">Remove Completed Tasks</button>
+  <button ng-click="$ctrl.deleteAll()">Remove Completed Tasks</button>
 </div>

@@ -1,8 +1,12 @@
 angular.module('todo-list')
+.controller('TodoListCtrl', function() {
+  console.log('here');
+})
 .component('todoList', {
   bindings: {
     service: '<',
-    todoList: '<'
+    todos: '<'
   },
+  controller: 'TodoListCtrl',
   templateUrl: '../templates/todoList.html'
 });
